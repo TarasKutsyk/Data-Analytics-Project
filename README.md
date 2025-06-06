@@ -21,9 +21,15 @@ Parameters must be defined at the moment of creating the Data class instance. Se
  
 Main function in Data class is fit() fucntion. See example in Data_class.ipynb file.
 
-Remark on OneHot endcoding: Since the list od Series type cannot be the element of DataFrame, I had put the result of OneHot as string. If you want it can be changed e.g. on more colums of numerical type i.e. column 'weather' which has 3 features can be transform into 3 columns accordingly to OneHot encoding. Or I can do diffrently.
+Remark on types of data: There are 4 list with listed columns of Categorical, Categorical with order, Binary or Numerical type.
 
-Remark on types of data: there are 3 list with listed columns of Cotegorical, Binary or Numerical type.
+Remark on OneHot endcoding: Replace old column with new columns with OneHot encoding vector.
+
+Remark on 0,1,2... encoding: For columns of Categorical with order, this type encoding is fixed.
+
+###[Marcin] I will check how removing some rows with low frequency in columns will implied on dataset, and write which rows with which feature in which column could be removed.
+
+
 
 ### [Taras] My suggestions for improvement
 [I can do some of this later if needed]
@@ -73,4 +79,4 @@ Which means that `gt8` category (greater than 8) would have a smaller numerical 
 
 ### Other notes
 [Not necessarily need fixing, just so that we remember]
-- If the dictionary is specified for "EncConfig", all the categorical columns must be probided as keys, otherwise they are not encoded. 
+- If the dictionary is specified for "EncConfig", all the categorical columns must be provided as keys, otherwise they are not encoded. 

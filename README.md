@@ -24,3 +24,53 @@ Main function in Data class is fit() fucntion. See example in Data_class.ipynb f
 Remark on OneHot endcoding: Since the list od Series type cannot be the element of DataFrame, I had put the result of OneHot as string. If you want it can be changed e.g. on more colums of numerical type i.e. column 'weather' which has 3 features can be transform into 3 columns accordingly to OneHot encoding. Or I can do diffrently.
 
 Remark on types of data: there are 3 list with listed columns of Cotegorical, Binary or Numerical type.
+
+### [Taras] My suggestions for improvement
+[I can do some of this later if needed]
+- It looks that currently the 'occupation' column is missing. I can understand if we decide to remove it because of how many unique values with low frequency it has:
+```
+--- occupation ---
+                                           count  proportion
+                                                  
+Unemployed                                  1870    0.147430
+Student                                     1584    0.124882
+Computer & Mathematical                     1408    0.111006
+Sales & Related                             1093    0.086172
+Education&Training&Library                   943    0.074346
+Management                                   838    0.066067
+Office & Administrative Support              639    0.050378
+Arts Design Entertainment Sports & Media     629    0.049590
+Business & Financial                         544    0.042889
+Retired                                      495    0.039026
+Food Preparation & Serving Related           298    0.023494
+Healthcare Practitioners & Technical         244    0.019237
+Healthcare Support                           242    0.019079
+Community & Social Services                  241    0.019000
+Legal                                        219    0.017266
+Transportation & Material Moving             218    0.017187
+Architecture & Engineering                   175    0.013797
+Personal Care & Service                      175    0.013797
+Protective Service                           175    0.013797
+Life Physical Social Science                 170    0.013403
+Construction & Extraction                    154    0.012141
+Installation Maintenance & Repair            133    0.010486
+Production Occupations                       110    0.008672
+Building & Grounds Cleaning & Maintenance     44    0.003469
+Farming Fishing & Forestry                    43    0.003390
+```
+But I'd like to experiment with adding at least most frequent occupations here (Unemployed, Student etc.) We can do this by discarding the occupations that are less than specified frequency (e.g. 0.01, discarding the last 3 rows above) and applying one-hot encoding to the remaining ones.
+
+- For both DT and NN models, I think we'd like to have the `OneHot` encodings as separate numerical columns rather than the strings.
+  
+> If you want it can be changed e.g. on more colums of numerical type i.e. column 'weather' which has 3 features can be transform into 3 columns accordingly to OneHot encoding
+
+Yes, at least for my NN models I'd like to have the above variant implemented.
+
+- I'm not sure about our encodings when "EncConfig = 'Num'" option is chosen. Specifically, I think it's worth checking the order in which it assign numerical values to our categories for every column. As I read, currently it uses the order of `Col.unique()` method. But this is problematic in some cases, for example for the columns indicating the frequency with which the driver attends some places like bars:
+`d1.Data['Bar'].unique()` gives
+`array(['never', 'less1', '1~3', 'gt8', '4~8'], dtype=object)`
+Which means that `gt8` category (greater than 8) would have a smaller numerical value than 4~8 (4 to 8), which is a bit problematic and might complicate the model training.
+
+### Other notes
+[Not necessarily need fixing, just so that we remember]
+- If the dictionary is specified for "EncConfig", all the categorical columns must be probided as keys, otherwise they are not encoded. 

@@ -27,7 +27,8 @@ Remark on OneHot endcoding: Replace old column with new columns with OneHot enco
 
 Remark on 0,1,2... encoding: For columns of Categorical with order, this type encoding is fixed.
 
-###[Marcin] I will check how removing some rows with low frequency in columns will implied on dataset, and write which rows with which feature in which column could be removed.
+### [Marcin] 
+I will check how removing some rows with low frequency in columns will implied on dataset, and write which rows with which feature in which column could be removed.
 
 
 

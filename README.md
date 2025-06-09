@@ -24,8 +24,12 @@ Main function in Data class is fit() fucntion. See example in Data_class.ipynb f
 Remark on types of data: There are 4 list with listed columns of Categorical, Categorical with order, Binary or Numerical type.
 
 Remark on OneHot endcoding: Replace old column with new columns with OneHot encoding vector.
+The new columns are now named after their original values, e.g. `destination_Work` instead of `destination_1` 
 
 Remark on 0,1,2... encoding: For columns of Categorical with order, this type encoding is fixed.
+
+Remark on NaN values: 'Car' column is unconditionally removed since it consists primarily of NaNs. Special column (`toCoupon_GEQ5min`) is removed by default since it has only one binary value 1.
+New change: if ImputeMissing=True is specified (default False), the remaining NaNs **are imputted instead of being dropped**. This might be beneficial since the remaining NaNs are not many and we don't have a lot of data to begin with.
 
 ### [Marcin] 
 I will check how removing some rows with low frequency in columns will implied on dataset, and write which rows with which feature in which column could be removed.
@@ -66,17 +70,6 @@ Building & Grounds Cleaning & Maintenance     44    0.003469
 Farming Fishing & Forestry                    43    0.003390
 ```
 But I'd like to experiment with adding at least most frequent occupations here (Unemployed, Student etc.) We can do this by discarding the occupations that are less than specified frequency (e.g. 0.01, discarding the last 3 rows above) and applying one-hot encoding to the remaining ones.
-
-- For both DT and NN models, I think we'd like to have the `OneHot` encodings as separate numerical columns rather than the strings.
-  
-> If you want it can be changed e.g. on more colums of numerical type i.e. column 'weather' which has 3 features can be transform into 3 columns accordingly to OneHot encoding
-
-Yes, at least for my NN models I'd like to have the above variant implemented.
-
-- I'm not sure about our encodings when "EncConfig = 'Num'" option is chosen. Specifically, I think it's worth checking the order in which it assign numerical values to our categories for every column. As I read, currently it uses the order of `Col.unique()` method. But this is problematic in some cases, for example for the columns indicating the frequency with which the driver attends some places like bars:
-`d1.Data['Bar'].unique()` gives
-`array(['never', 'less1', '1~3', 'gt8', '4~8'], dtype=object)`
-Which means that `gt8` category (greater than 8) would have a smaller numerical value than 4~8 (4 to 8), which is a bit problematic and might complicate the model training.
 
 ### Other notes
 [Not necessarily need fixing, just so that we remember]

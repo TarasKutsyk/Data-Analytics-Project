@@ -4,6 +4,8 @@ Name of file with data is putted in class under self.DataName. Make sure that yo
 
 There are 5 optional parameters:
 - DropCol (DropCol = None): a list of names of columns to be deleted. Do not put column 'car'. It is drop in NaN preprocessing.
+- DropRow (DropRow = None): a list of tupeles: [(column, value), ...] which must be removed from data.
+- DropRowEpsilon (DropRowEpsilon = 0): if DropRowEpsilon > 0, then removed all (column, value) rows where the frequency of value in data is less than epsilon.
 - EncConfig (EncConfig = None): encoding conficuration. The are some possible input:
     - If not defined: there is no endcoding included.
     - If EncConfig = 'OneHot': all categorical features are encoded using OneHot encoding.
@@ -15,7 +17,8 @@ There are 5 optional parameters:
 - TempScal (TempScal = 'Robust'): define the way of standardization of 'temperature' column if it is numerical type. There 2 option of standardization:
     - If TempScal = 'Robust': standardization via quartiles.
     - If TempScal = 'Standard': standardization via mean value and standrad deviation.
-  - DropSpCol (DropSpCol = True): there is one column, that is 'toCoupon_GEQ5min' column that have only one binary value 1. Default value is True -> it is automically removed.
+- DropSpCol (DropSpCol = True): there is one column, that is 'toCoupon_GEQ5min' column that have only one binary value 1. Default value is True -> it is automically removed.
+- ImputeMissing (ImputeMissing = False): if ImputeMissing = True, then the rows with NaN values are imputted with modes (for categorical or binay values) or median (for numerical values).
 
 Parameters must be defined at the moment of creating the Data class instance. See example in Data_class.ipynb file.
  
@@ -29,10 +32,9 @@ The new columns are now named after their original values, e.g. `destination_Wor
 Remark on 0,1,2... encoding: For columns of Categorical with order, this type encoding is fixed.
 
 Remark on NaN values: 'Car' column is unconditionally removed since it consists primarily of NaNs. Special column (`toCoupon_GEQ5min`) is removed by default since it has only one binary value 1.
-New change: if ImputeMissing=True is specified (default False), the remaining NaNs **are imputted instead of being dropped**. This might be beneficial since the remaining NaNs are not many and we don't have a lot of data to begin with.
 
-### [Marcin] 
-I will check how removing some rows with low frequency in columns will implied on dataset, and write which rows with which feature in which column could be removed.
+Remark on epsilon value: putting DropRowEpsilon = 0.01 you are using 3% of data.
+
 
 
 

@@ -1,4 +1,5 @@
-Functionality of Data class:
+# Main.ipynb notebook
+## Functionality of Data class
 
 Name of file with data is putted in class under self.DataName. Make sure that you have dataset file in the same folder in which you have your working file.
 

@@ -34,3 +34,10 @@ Remark on 0,1,2... encoding: For columns of Categorical with order, this type en
 Remark on NaN values: 'Car' column is unconditionally removed since it consists primarily of NaNs. Special column (`toCoupon_GEQ5min`) is removed by default since it has only one binary value 1.
 
 Remark on epsilon value: putting DropRowEpsilon = 0.01 you are using 3% of data.
+
+
+### Other notes
+- If the dictionary is specified for "EncConfig", all the categorical columns must be provided as keys, otherwise they are not encoded. 
+
+## Models training
+Then, in the subsequent "Decision tree" and "Linear regression, SVM and neural networks" sections of the Main.ipynb notebook, we train and compare different classification models, and also perform hyperparam optimization for Decision Trees and Neural networks.

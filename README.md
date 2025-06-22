@@ -1,4 +1,5 @@
-Functionality of Data class:
+# Main.ipynb notebook
+## Functionality of Data class
 
 Name of file with data is putted in class under self.DataName. Make sure that you have dataset file in the same folder in which you have your working file.
 
@@ -36,43 +37,8 @@ Remark on NaN values: 'Car' column is unconditionally removed since it consists 
 Remark on epsilon value: putting DropRowEpsilon = 0.01 you are using 3% of data.
 
 
-
-
-### [Taras] My suggestions for improvement
-[I can do some of this later if needed]
-- It looks that currently the 'occupation' column is missing. I can understand if we decide to remove it because of how many unique values with low frequency it has:
-```
---- occupation ---
-                                           count  proportion
-                                                  
-Unemployed                                  1870    0.147430
-Student                                     1584    0.124882
-Computer & Mathematical                     1408    0.111006
-Sales & Related                             1093    0.086172
-Education&Training&Library                   943    0.074346
-Management                                   838    0.066067
-Office & Administrative Support              639    0.050378
-Arts Design Entertainment Sports & Media     629    0.049590
-Business & Financial                         544    0.042889
-Retired                                      495    0.039026
-Food Preparation & Serving Related           298    0.023494
-Healthcare Practitioners & Technical         244    0.019237
-Healthcare Support                           242    0.019079
-Community & Social Services                  241    0.019000
-Legal                                        219    0.017266
-Transportation & Material Moving             218    0.017187
-Architecture & Engineering                   175    0.013797
-Personal Care & Service                      175    0.013797
-Protective Service                           175    0.013797
-Life Physical Social Science                 170    0.013403
-Construction & Extraction                    154    0.012141
-Installation Maintenance & Repair            133    0.010486
-Production Occupations                       110    0.008672
-Building & Grounds Cleaning & Maintenance     44    0.003469
-Farming Fishing & Forestry                    43    0.003390
-```
-But I'd like to experiment with adding at least most frequent occupations here (Unemployed, Student etc.) We can do this by discarding the occupations that are less than specified frequency (e.g. 0.01, discarding the last 3 rows above) and applying one-hot encoding to the remaining ones.
-
 ### Other notes
-[Not necessarily need fixing, just so that we remember]
 - If the dictionary is specified for "EncConfig", all the categorical columns must be provided as keys, otherwise they are not encoded. 
+
+## Models training
+Then, in the subsequent "Decision tree" and "Linear regression, SVM and neural networks" sections of the Main.ipynb notebook, we train and compare different classification models, and also perform hyperparam optimization for Decision Trees and Neural networks.
